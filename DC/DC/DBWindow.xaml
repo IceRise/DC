@@ -38,6 +38,7 @@
                   Grid.Row="1"
                   Grid.RowSpan="3"
                   Grid.Column="1"
+                  CellEditEnding="dataGrid_CellEditEnding"
                   InitializingNewItem="dataGrid_InitializingNewItem"
                   SelectionMode="Single" />
         <Button Name="Commit"

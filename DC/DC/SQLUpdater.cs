@@ -13,7 +13,7 @@ namespace DC
         {
             Source = new GetMSSQLData(sourceTable.TableName);
             DataTable changesTable = sourceTable.GetChanges();
-
+            
             string command;
             bool exist = false;
             foreach (DataRow dr in changesTable.Rows)

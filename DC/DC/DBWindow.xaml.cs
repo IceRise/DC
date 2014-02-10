@@ -50,6 +50,7 @@ namespace DC
             {
                 MessageBox.Show("Неможливо отримати список серверів", "Помилка", MessageBoxButton.OK, MessageBoxImage.Exclamation);
             }
+            Commit.IsEnabled = false;
         }
 
         private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -72,9 +73,18 @@ namespace DC
 
         private void Button_Commit(object sender, RoutedEventArgs e)
         {
-            SQLUpdater s = new SQLUpdater();
-            s.Update(fillDataGrid, MS.Items);
-            fillDataGrid.AcceptChanges();
+            try
+            {
+                SQLUpdater s = new SQLUpdater();
+                s.Update(fillDataGrid, MS.Items);
+                fillDataGrid.AcceptChanges();
+                Commit.IsEnabled = false;
+                Messager.Info("Оновлення виконано успішно", "Успішно");
+            }
+            catch (Exception ex)
+            {
+                Messager.Error(ex.Message, "Помилка");
+            }
         }
 
 
@@ -162,7 +172,25 @@ namespace DC
 
         private void Button_RejectChanges(object sender, RoutedEventArgs e)
         {
-            fillDataGrid.RejectChanges();
+
+            try
+            {
+                fillDataGrid.RejectChanges();
+                Commit.IsEnabled = false;
+            }
+            catch (Exception)
+            { }
+
+        }
+
+        private void dataGrid_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
+        {
+
+        }
+
+        private void dataGrid_CellEditEnding(object sender, DataGridCellEditEndingEventArgs e)
+        {
+            Commit.IsEnabled = true;
         }
     }
 
