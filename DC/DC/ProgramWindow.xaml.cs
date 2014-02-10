@@ -49,6 +49,23 @@ namespace DC
             SystemSettingsWindow ss = new SystemSettingsWindow();
             ss.Owner = this;
             ss.ShowDialog();
+            if (SessionParameters.EtalonDataBase != "")
+                DataBaseItem.IsEnabled = true;
+            else
+                DataBaseItem.IsEnabled = false;
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (SessionParameters.EtalonDataBase == "")
+            {
+                DataBaseItem.IsEnabled = false;
+            }
+        }
+
+        private void Menu_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

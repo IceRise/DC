@@ -1,4 +1,5 @@
-﻿using System.Data;
+﻿using System;
+using System.Data;
 using System.Data.SqlClient;
 
 namespace DC
@@ -54,7 +55,14 @@ namespace DC
                 {
                     DataTable primaryKeyTable = new DataTable();
                     primaryKeyTable.Load(pkreader);
-                    PrimaryKey = primaryKeyTable.Rows[0][0].ToString();
+                    try
+                    {
+                        PrimaryKey = primaryKeyTable.Rows[0][0].ToString();
+                    }
+                    catch (Exception ex)
+                    {
+
+                    }
                 }
                 sc.Close();
             }

@@ -39,11 +39,12 @@ namespace DC
 
         private void Button_Commit(object sender, RoutedEventArgs e)
         {
-
             settings["Server"] = ServerBox.Text;
+            SessionParameters.EtalonServer = ServerBox.Text;
             settings["DataBase"] = DataBaseBox.Text;
+            SessionParameters.EtalonDataBase = DataBaseBox.Text;
             settings["IntegratedSecurity"] = IntegratedSecurityBox.IsChecked.ToString();
-            StreamWriter settingsWriter = new StreamWriter("SystemSettings.ini",false);
+            StreamWriter settingsWriter = new StreamWriter("SystemSettings.ini", false);
             foreach (string s in settings.Keys)
             {
                 settingsWriter.WriteLine(s + "|" + settings[s]);

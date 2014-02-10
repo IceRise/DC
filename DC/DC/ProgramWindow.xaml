@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Width="380"
         Height="260"
+        Loaded="Window_Loaded"
         ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen">
     <Grid Background="WhiteSmoke">
@@ -12,9 +13,15 @@
         </Grid.RowDefinitions>
 
         <Menu>
-            <MenuItem Header="Меню">
-                <MenuItem Click="MenuItem_DataBases" Header="База даних" />
-                <MenuItem Click="MenuItem_AddServer" Header="Список серверів" />
+            <MenuItem Name="MenuItem"
+                      Click="Menu_Click"
+                      Header="Меню">
+                <MenuItem Name="DataBaseItem"
+                          Click="MenuItem_DataBases"
+                          Header="База даних" />
+                <MenuItem Name="ListItem"
+                          Click="MenuItem_AddServer"
+                          Header="Список серверів" />
                 <Separator />
                 <MenuItem Click="MenuItem_Exit" Header="Вихід" />
             </MenuItem>
