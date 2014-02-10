@@ -1,0 +1,45 @@
+﻿<Window x:Class="DC.AddServer"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Width="373.972"
+        Height="206.165"
+        ResizeMode="NoResize">
+    <Grid>
+        <TextBox Name="NameBox"
+                 Width="120"
+                 Height="23"
+                 Margin="219,77,0,0"
+                 HorizontalAlignment="Left"
+                 VerticalAlignment="Top"
+                 TextWrapping="Wrap" />
+        <ComboBox Name="TypeBox"
+                  Width="120"
+                  Margin="219,22,0,0"
+                  HorizontalAlignment="Left"
+                  VerticalAlignment="Top"
+                  SelectedIndex="0">
+            <TextBlock Background="Transparent" Text="MSSQL" />
+            <TextBlock Background="Transparent" Text="MySQL" />
+        </ComboBox>
+        <Label Margin="29,22,0,0"
+               HorizontalAlignment="Left"
+               VerticalAlignment="Top"
+               Content="Тип бази даних" />
+        <Label Margin="29,77,0,0"
+               HorizontalAlignment="Left"
+               VerticalAlignment="Top"
+               Content="Ім'я бази даних/IP-адреса" />
+        <Button Width="87"
+                Margin="252,132,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Click="Button_Add"
+                Content="Додати" />
+        <Button Width="75"
+                Margin="133,132,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Content="Відмінити" Click="Button_Close" />
+
+    </Grid>
+</Window>

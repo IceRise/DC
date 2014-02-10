@@ -1,0 +1,65 @@
+﻿<Window x:Class="DC.DBWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="DataBases"
+        Width="800"
+        Height="370"
+        Closed="Window_Closed"
+        Loaded="Window_Loaded">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="23*" MaxHeight="23" />
+            <RowDefinition Height="158*" />
+            <RowDefinition Height="159*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="186*"
+                              MinWidth="150"
+                              MaxWidth="250" />
+            <ColumnDefinition Width="517*" />
+            <ColumnDefinition Width="Auto"
+                              MinWidth="89"
+                              MaxWidth="250" />
+        </Grid.ColumnDefinitions>
+        <TreeView Name="ServerTree"
+                  Grid.RowSpan="3"
+                  Grid.Column="2">
+            <TreeViewItem Name="MS" Header="MSSQL" />
+            <TreeViewItem Name="My"
+                          Header="MySQL"
+                          Visibility="Hidden" />
+        </TreeView>
+        <ListBox Name="DBList"
+                 Grid.RowSpan="3"
+                 Grid.Column="0"
+                 Margin="0,23,0.4,0"
+                 SelectionChanged="ListBox_SelectionChanged" />
+        <DataGrid Name="dataGrid"
+                  Grid.Row="1"
+                  Grid.RowSpan="3"
+                  Grid.Column="1"
+                  InitializingNewItem="dataGrid_InitializingNewItem"
+                  SelectionMode="Single" />
+        <Button Name="Commit"
+                Grid.Row="0"
+                Grid.Column="1"
+                Margin="0,1,0.8,0.2"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Center"
+                Background="Transparent"
+                BorderBrush="Transparent"
+                Click="Button_Commit">
+            <Image Source="Icons/Commit.ico" />
+        </Button>
+        <Button Grid.Row="0"
+                Grid.Column="1"
+                Margin="0,0,22.8,0"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Top"
+                Background="Transparent"
+                BorderBrush="Transparent"
+                Click="Button_RejectChanges">
+            <Image Source="Icons/Reject.ico" />
+        </Button>
+    </Grid>
+</Window>

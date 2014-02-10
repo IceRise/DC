@@ -1,0 +1,52 @@
+C:\Users\Sever\Documents\Visual Studio 2012\Projects\DC\DC\bin\Debug\DC.exe.config
+C:\Users\Sever\Documents\Visual Studio 2012\Projects\DC\DC\bin\Debug\DC.exe
+C:\Users\Sever\Documents\Visual Studio 2012\Projects\DC\DC\bin\Debug\DC.pdb
+C:\Users\Sever\Documents\Visual Studio 2012\Projects\DC\DC\bin\Debug\MySql.Data.dll
+C:\Users\Sever\Documents\Visual Studio 2012\Projects\DC\DC\obj\Debug\DC.csprojResolveAssemblyReference.cache
+C:\Users\Sever\Documents\Visual Studio 2012\Projects\DC\DC\obj\Debug\App.g.cs
+C:\Users\Sever\Documents\Visual Studio 2012\Projects\DC\DC\obj\Debug\DC_MarkupCompile.cache
+C:\Users\Sever\Documents\Visual Studio 2012\Projects\DC\DC\obj\Debug\DC.g.resources
+C:\Users\Sever\Documents\Visual Studio 2012\Projects\DC\DC\obj\Debug\DC.Properties.Resources.resources
+C:\Users\Sever\Documents\Visual Studio 2012\Projects\DC\DC\obj\Debug\DC.csproj.GenerateResource.Cache
+C:\Users\Sever\Documents\Visual Studio 2012\Projects\DC\DC\obj\Debug\DC.exe
+C:\Users\Sever\Documents\Visual Studio 2012\Projects\DC\DC\obj\Debug\DC.pdb
+C:\Users\Sever\Documents\Visual Studio 2012\Projects\DC\DC\obj\Debug\MainWindow.baml
+C:\Users\Sever\Documents\Visual Studio 2012\Projects\DC\DC\obj\Debug\MainWindow.g.cs
+C:\Users\Sever\Documents\Visual Studio 2012\Projects\DC\DC\obj\Debug\Program.baml
+C:\Users\Sever\Documents\Visual Studio 2012\Projects\DC\DC\obj\Debug\Program.g.cs
+C:\Users\Sever\Documents\Visual Studio 2012\Projects\DC\DC\obj\Debug\DBWindow.baml
+C:\Users\Sever\Documents\Visual Studio 2012\Projects\DC\DC\obj\Debug\DBWindow.g.cs
+C:\Users\Sever\Documents\Visual Studio 2012\Projects\DC\DC\obj\Debug\AddServer.baml
+C:\Users\Sever\Documents\Visual Studio 2012\Projects\DC\DC\obj\Debug\AddServer.g.cs
+C:\Users\Sever\Documents\Visual Studio 2012\Projects\DC\DC\obj\Debug\ServerManager.baml
+C:\Users\Sever\Documents\Visual Studio 2012\Projects\DC\DC\obj\Debug\ServerManager.g.cs
+C:\Users\Sever\Documents\Visual Studio 2012\Projects\DC\DC\obj\Debug\App.baml
+C:\Users\Sever\Documents\Visual Studio 2012\Projects\DC\DC\obj\Debug\SystemSettings.baml
+C:\Users\Sever\Documents\Visual Studio 2012\Projects\DC\DC\obj\Debug\SystemSettings.g.cs
+C:\Users\Олег\Desktop\Диплом\DC\DC\bin\Debug\DC.exe.config
+C:\Users\Олег\Desktop\Диплом\DC\DC\obj\Debug\DC.exe
+C:\Users\Олег\Desktop\Диплом\DC\DC\obj\Debug\DC.pdb
+C:\Users\Олег\Desktop\Диплом\DC\DC\bin\Debug\DC.exe
+C:\Users\Олег\Desktop\Диплом\DC\DC\bin\Debug\DC.pdb
+C:\Users\Олег\Desktop\Диплом\DC\DC\obj\Debug\DC.csprojResolveAssemblyReference.cache
+C:\Users\Олег\Desktop\Диплом\DC\DC\obj\Debug\App.baml
+C:\Users\Олег\Desktop\Диплом\DC\DC\obj\Debug\App.g.cs
+C:\Users\Олег\Desktop\Диплом\DC\DC\obj\Debug\DC_MarkupCompile.cache
+C:\Users\Олег\Desktop\Диплом\DC\DC\obj\Debug\DC.g.resources
+C:\Users\Олег\Desktop\Диплом\DC\DC\obj\Debug\DC.Properties.Resources.resources
+C:\Users\Олег\Desktop\Диплом\DC\DC\obj\Debug\DC.csproj.GenerateResource.Cache
+C:\Users\Олег\Desktop\Диплом\DC\DC\obj\Debug\ServerAddWindow.baml
+C:\Users\Олег\Desktop\Диплом\DC\DC\obj\Debug\DBWindow.baml
+C:\Users\Олег\Desktop\Диплом\DC\DC\obj\Debug\LoginWindow.baml
+C:\Users\Олег\Desktop\Диплом\DC\DC\obj\Debug\ServerManagerWindow.baml
+C:\Users\Олег\Desktop\Диплом\DC\DC\obj\Debug\SystemSettingsWindow.baml
+C:\Users\Олег\Desktop\Диплом\DC\DC\obj\Debug\ServerAddWindow.g.cs
+C:\Users\Олег\Desktop\Диплом\DC\DC\obj\Debug\DBWindow.g.cs
+C:\Users\Олег\Desktop\Диплом\DC\DC\obj\Debug\LoginWindow.g.cs
+C:\Users\Олег\Desktop\Диплом\DC\DC\obj\Debug\ServerManagerWindow.g.cs
+C:\Users\Олег\Desktop\Диплом\DC\DC\obj\Debug\SystemSettingsWindow.g.cs
+C:\Users\Олег\Desktop\Диплом\DC\DC\obj\Debug\ProgramWindow.baml
+C:\Users\Олег\Desktop\Диплом\DC\DC\obj\Debug\ProgramWindow.g.cs
+D:\Files\Диплом\DC\DC\bin\Debug\DC.exe.config
+D:\Files\Диплом\DC\DC\obj\Debug\DC.exe
+D:\Files\Диплом\DC\DC\obj\Debug\DC.pdb

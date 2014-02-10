@@ -1,0 +1,99 @@
+﻿<Window x:Class="DC.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Вхід"
+        Width="357.2"
+        Height="237.8"
+        Loaded="Window_Loaded"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen">
+    <Grid>
+
+
+        <Border Margin="0,0,0,20"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                BorderBrush="Gray"
+                BorderThickness="1"
+                CornerRadius="5">
+            <Grid Name="Login_Grid"
+                  HorizontalAlignment="Left"
+                  VerticalAlignment="Top">
+                <Label Margin="10"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Top"
+                       Content="Логін" />
+                <Label Margin="10,50,0,10"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Top"
+                       Content="Пароль" />
+                <TextBox Name="LoginBox"
+                         Width="150"
+                         Height="23"
+                         Margin="100,10,10,0"
+                         HorizontalAlignment="Left"
+                         VerticalAlignment="Top" />
+                <PasswordBox Name="PasswordBox"
+                             Width="150"
+                             Height="23"
+                             Margin="100,50,10,0"
+                             HorizontalAlignment="Left"
+                             VerticalAlignment="Top" />
+            </Grid>
+        </Border>
+
+        <Border Margin="120,0,0,15"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Bottom"
+                Background="Beige"
+                BorderBrush="Gray"
+                BorderThickness="1"
+                CornerRadius="5">
+            <Button Name="Enter"
+                    Width="100"
+                    Height="20"
+                    VerticalAlignment="Top"
+                    Background="Transparent"
+                    BorderBrush="Transparent"
+                    Click="Button_Enter"
+                    Content="Увійти" />
+        </Border>
+        <Border Margin="0,0,120,15"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Bottom"
+                Background="Beige"
+                BorderBrush="Gray"
+                BorderThickness="1"
+                CornerRadius="5">
+            <Button Name="Exit"
+                    Width="100"
+                    Height="20"
+                    VerticalAlignment="Top"
+                    Background="Transparent"
+                    BorderBrush="Transparent"
+                    Click="Exit_Click"
+                    Content="Вихід" />
+
+        </Border>
+        <Grid HorizontalAlignment="Center" VerticalAlignment="Top">
+            <Label Margin="0,10,0,10"
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Top"
+                   Content="Сервер" />
+            <ComboBox Name="Server_Combo_box"
+                      Width="150"
+                      Height="23"
+                      Margin="100,0,10,0"
+                      HorizontalAlignment="Left"
+                      VerticalAlignment="Center"
+                      IsEditable="True" />
+        </Grid>
+        <CheckBox Name="Windows_Auth"
+                  Margin="45"
+                  HorizontalAlignment="Center"
+                  VerticalAlignment="Bottom"
+                  Click="Windows_Auth_Click"
+                  Content="Авторизація Windiws" />
+    </Grid>
+
+</Window>
