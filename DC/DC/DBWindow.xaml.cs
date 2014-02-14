@@ -36,9 +36,15 @@ namespace DC
             try
             {
                 if (SessionParameters.IntegratedSecurity)
-                    SessionParameters.Connection = string.Format("Server={0};Database={1};Integrated security=true", SessionParameters.EtalonServer, SessionParameters.EtalonDataBase);
+                    SessionParameters.Connection = string.Format("Server={0};Database={1};Integrated security=true",
+                        SessionParameters.EtalonServer,
+                        SessionParameters.EtalonDataBase);
                 else
-                    SessionParameters.Connection = string.Format("Server={0};Database={1};UID={2};Password={3}", SessionParameters.EtalonServer, SessionParameters.EtalonDataBase, SessionParameters.Login, SessionParameters.Password);
+                    SessionParameters.Connection = string.Format("Server={0};Database={1};UID={2};Password={3}",
+                        SessionParameters.EtalonServer,
+                        SessionParameters.EtalonDataBase,
+                        SessionParameters.Login,
+                        SessionParameters.Password);
 
                 //Отримання списку таблиць з еталонної БД і присвоєння їх до DBList
                 SqlCommand command = new SqlCommand("select * from sys.tables where type_desc = 'USER_TABLE';");
@@ -56,18 +62,20 @@ namespace DC
         private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             //Пошук таблиць по серверам
-            tableSearcher();
+            SearchTable();
+            MS.Items.Clear();
+            Composer();
+            //MS_ListBox.ItemsSource = 
             //Отримання даних з обраної таблиці та приписування їх до DataGridу
             fillDataGrid = new GetMSSQLData((string)DBList.SelectedItem);
-            dataGrid.ItemsSource = fillDataGrid.DefaultView;
-
+            dataGrid.ItemsSource = fillDataGrid.Table.DefaultView;
             try
             {
-                fillDataGrid.Columns[fillDataGrid.PrimaryKey].ReadOnly = true;
-                dataGrid.Columns[fillDataGrid.Columns["vcChangeDate"].Ordinal].IsReadOnly = true;
+                fillDataGrid.Table.Columns[fillDataGrid.PrimaryKey].ReadOnly = true;
+                dataGrid.Columns[fillDataGrid.Table.Columns["vcChangeDate"].Ordinal].IsReadOnly = true;
             }
             catch { }
-            dt = fillDataGrid;
+            dt = fillDataGrid.Table;
             dt.TableNewRow += dt_TableNewRow;
         }
 
@@ -77,7 +85,7 @@ namespace DC
             {
                 SQLUpdater s = new SQLUpdater();
                 s.Update(fillDataGrid, MS.Items);
-                fillDataGrid.AcceptChanges();
+                fillDataGrid.Table.AcceptChanges();
                 Commit.IsEnabled = false;
                 Messager.Info("Оновлення виконано успішно", "Успішно");
             }
@@ -87,11 +95,49 @@ namespace DC
             }
         }
 
+        private void Composer()
+        {
+            List<string> servers = new List<string>(new string[] { SessionParameters.EtalonServer });
+
+            foundTables.ForEach(element =>
+            {
+                if (!servers.Exists(item => item == element.Split('/')[0]))
+                {
+                    servers.Add(element);
+                }
+            });
+
+            servers.ForEach(server =>
+            {
+                TreeViewItem tvi = new TreeViewItem();
+                tvi.Name = server;
+                tvi.Header = server;
+                foreach (string s in foundTables)
+                {
+                    if (s.Split('/')[0] == server)
+                    {
+                        TreeViewItem child = new TreeViewItem();
+                        child.Header = s.Split('/')[1];
+                        child.MouseDoubleClick += child_MouseDoubleClick;
+
+                        tvi.Items.Add(child);
+                    }
+                }
+                if (tvi.Items.Count > 0)
+                    MS.Items.Add(tvi);
+            });
+        }
+
+        void child_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            ShowDB();
+        }
+
 
         /// <summary>
         /// Пошук таблиць з тим самим ім'ям, шо й таблиця, вибрана в DBList
         /// </summary>
-        private void tableSearcher()
+        private List<string> SearchTable()
         {
             //Для динамічного оновлення результату пошуку
             MS.ItemsSource = null;
@@ -99,7 +145,7 @@ namespace DC
 
             List<string> List = StreamWorker.ReadList("ServerList.ini");
             List<string> serverList = new List<string>();
-            serverList.Add(SessionParameters.EtalonServer);//++++++++++++++++++++++++++++++
+            serverList.Add(SessionParameters.EtalonServer);
 
             //Відділення типу БД від назви серверу
             foreach (string s in serverList)
@@ -119,39 +165,32 @@ namespace DC
                 { connection = string.Format("Server={0};UID={1};Password={2}", server, SessionParameters.Login, SessionParameters.Password); }
 
                 //Отримання списку баз даних та їх запис до dataBaseList
-                DataTable dataBasesTable = new DataTable();
+                BaseDataTable dataBasesTable = new GetMSSQLData();
                 using (SqlConnection getDataBases = new SqlConnection(connection))
                 {
                     getDataBases.Open();
-                    dataBasesTable = getDataBases.GetSchema("Databases");
+                    dataBasesTable.Table = getDataBases.GetSchema("Databases");
                     getDataBases.Close();
                 }
-                string[] dataBaseList = new string[dataBasesTable.Rows.Count];
-                for (int i = 0; i < dataBasesTable.Rows.Count; i++)
-                {
-                    dataBaseList[i] = dataBasesTable.Rows[i][0].ToString();
-                }
+
+                string[] dataBaseList = dataBasesTable.GetColumnData(0);
 
                 //Для кожної БД...
                 foreach (string dataBase in dataBaseList)
                 {
                     string selectDBCommand = "SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES;";
-                    string selectDBConnection = connection + ";DataBase=" + dataBase;
+                    string selectDBConnection = connection + "; DataBase=" + dataBase;
                     GetMSSQLData takenDataTables = new GetMSSQLData(selectDBConnection, selectDBCommand);
 
                     //Для кожної таблиці...
-                    foreach (string table in takenDataTables.GetColumnData(0))
+                    if (takenDataTables.GetColumnData(0).Where((s) => s == DBList.SelectedItem.ToString()).Count() > 0)
                     {
-                        if (table == DBList.SelectedItem.ToString())
-                        {
-                            foundTables.Add(server + "/" + dataBase);
-                        }
+                        foundTables.Add(server + "/" + dataBase);
                     }
-
                 }
 
             }
-            MS.ItemsSource = foundTables;
+            return foundTables;
         }
 
         void dt_TableNewRow(object sender, DataTableNewRowEventArgs e)
@@ -160,14 +199,14 @@ namespace DC
             {
                 dt = null;
                 DateTime d = DateTime.Now;
-                e.Row[fillDataGrid.Columns["vcChangeDate"].Ordinal] = DateTime.Now;
+                e.Row[fillDataGrid.Table.Columns["vcChangeDate"].Ordinal] = DateTime.Now;
             }
             catch { }
         }
 
         private void dataGrid_InitializingNewItem(object sender, InitializingNewItemEventArgs e)
         {
-            dt = fillDataGrid;
+            dt = fillDataGrid.Table;
         }
 
         private void Button_RejectChanges(object sender, RoutedEventArgs e)
@@ -175,7 +214,7 @@ namespace DC
 
             try
             {
-                fillDataGrid.RejectChanges();
+                fillDataGrid.Table.RejectChanges();
                 Commit.IsEnabled = false;
             }
             catch (Exception)
@@ -192,6 +231,34 @@ namespace DC
         {
             Commit.IsEnabled = true;
         }
+
+        private void ShowDB()
+        {
+            TreeViewItem dataBase = (TreeViewItem)ServerTree.SelectedItem;
+            TreeViewItem server = (TreeViewItem)dataBase.Parent;
+            TreeViewItem serverType = (TreeViewItem)server.Parent;
+
+            SqlConnection sc = new SqlConnection(String.Format("Server={0}; Database={1}; Integrated security=true", server.Header, dataBase.Header));
+            SqlCommand command = sc.CreateCommand();
+            command.CommandText = "SELECT * FROM " + DBList.SelectedValue.ToString();
+            sc.Open();
+            using (SqlDataReader r = command.ExecuteReader())
+            {
+
+                DataTable dt = new DataTable();
+                dt.Load(r);
+                ExportTable.DT = dt;
+            }
+            sc.Close();
+
+            TableViewer tv = new TableViewer();
+            tv.Show();
+
+        }
     }
 
+    public static class ExportTable
+    {
+        public static DataTable DT { get; set; }
+    }
 }

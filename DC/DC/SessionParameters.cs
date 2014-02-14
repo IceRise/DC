@@ -1,7 +1,7 @@
 ﻿
 namespace DC
 {
-    static class SessionParameters
+    internal static class SessionParameters
     {
         public static string Login { get; set; }
         public static string Password { get; set; }

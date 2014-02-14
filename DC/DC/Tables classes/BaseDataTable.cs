@@ -9,62 +9,13 @@ namespace DC
     /// Тип, який отримує дані з бази на основі строки підключення SystemSettings.Connection та команди в сигнатурі
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    abstract class BaseDataTable
+    internal abstract class BaseDataTable
     {
-        protected DataTable resultTable;
+        public DataTable Table;
 
         public string PrimaryKey { get; protected set; }
 
-        public static implicit operator BaseDataTable(DataTable resulttable)
-        {
-            return resulttable;
-        }
-
-        public void RejectChanges()
-        {
-            resultTable.RejectChanges();
-        }
-
-        public void AcceptChanges()
-        {
-            resultTable.AcceptChanges();
-        }
-
-        public static implicit operator DataTable(BaseDataTable gd)
-        {
-            return gd.resultTable;
-        }
-
-        public DataColumnCollection Columns
-        {
-            get { return resultTable.Columns; }
-        }
-
-        public DataRow NewRow()
-        {
-            return resultTable.NewRow();
-        }
-
-        public DataRowCollection Rows
-        {
-            get { return resultTable.Rows; }
-        }
-        public string TableName
-        {
-            get { return resultTable.TableName; }
-            set { resultTable.TableName = value; }
-        }
-
-        public DataTable GetChanges()
-        {
-            return resultTable.GetChanges();
-        }
-
-        public DataView DefaultView
-        {
-            get { return resultTable.DefaultView; }
-        }
-
+        
         /// <summary>
         /// Повертає массив типу string, у якому знаходяться значення стовпця за його індексом
         /// </summary>
@@ -72,10 +23,10 @@ namespace DC
         /// <returns></returns>
         public string[] GetColumnData(int k)
         {
-            string[] array = new string[resultTable.Rows.Count];
-            for (int i = 0; i < resultTable.Rows.Count; i++)
+            string[] array = new string[Table.Rows.Count];
+            for (int i = 0; i < Table.Rows.Count; i++)
             {
-                array.SetValue(resultTable.Rows[i][k].ToString(), i);
+                array.SetValue(Table.Rows[i][k].ToString(), i);
             }
             return array;
         }

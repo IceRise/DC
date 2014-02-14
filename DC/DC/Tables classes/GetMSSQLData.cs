@@ -7,7 +7,7 @@ namespace DC
     /// <summary>
     /// Клас, який представляє собою таблицю DataTable
     /// </summary>
-    internal class GetMSSQLData : BaseDataTable
+    internal sealed class GetMSSQLData : BaseDataTable
     {
         /// <summary>
         /// Тип, який працює з таблицею бази даних
@@ -16,20 +16,23 @@ namespace DC
         public GetMSSQLData(SqlCommand getCommand)
         {
             SqlConnection sc;
-            resultTable = new DataTable();
+            Table = new DataTable();
             sc = new SqlConnection(SessionParameters.Connection);
             getCommand.Connection = sc;
             using (sc)
             {
                 sc.Open();
                 using (SqlDataReader r = getCommand.ExecuteReader())
-                    resultTable.Load(r);
+                    Table.Load(r);
                 sc.Close();
             }
         }
-        //Пустий конструктор
+
+
         public GetMSSQLData()
         { }
+
+
 
         /// <summary>
         /// Тип, який працює з таблицею бази даних
@@ -38,11 +41,11 @@ namespace DC
         public GetMSSQLData(string table)
         {
             SqlConnection sc;
-            resultTable = new DataTable();
+            Table = new DataTable();
             sc = new SqlConnection(SessionParameters.Connection);
             SqlCommand getPrimaryKey = sc.CreateCommand();
             getPrimaryKey.CommandText = string.Format(
-                "SELECT column_name FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE WHERE OBJECTPROPERTY(OBJECT_ID(constraint_name), 'IsPrimaryKey') = 1 AND table_name = '{0}'", 
+                "SELECT column_name FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE WHERE OBJECTPROPERTY(OBJECT_ID(constraint_name), 'IsPrimaryKey') = 1 AND table_name = '{0}'",
                 table);
             SqlCommand getCommand = sc.CreateCommand();
             getCommand.CommandText = "SELECT * FROM " + table;
@@ -50,7 +53,7 @@ namespace DC
             {
                 sc.Open();
                 using (SqlDataReader reader = getCommand.ExecuteReader())
-                    resultTable.Load(reader);
+                    Table.Load(reader);
                 using (SqlDataReader pkreader = getPrimaryKey.ExecuteReader())
                 {
                     DataTable primaryKeyTable = new DataTable();
@@ -59,14 +62,14 @@ namespace DC
                     {
                         PrimaryKey = primaryKeyTable.Rows[0][0].ToString();
                     }
-                    catch (Exception ex)
+                    catch (Exception)
                     {
 
                     }
                 }
                 sc.Close();
             }
-            TableName = table;
+            Table.TableName = table;
         }
 
 
@@ -79,14 +82,14 @@ namespace DC
         {
             SqlConnection sc = new SqlConnection();
             sc.ConnectionString = connectionString;
-            resultTable = new DataTable();
+            Table = new DataTable();
             SqlCommand getCommand = sc.CreateCommand();
             getCommand.CommandText = command;
             using (sc)
             {
                 sc.Open();
                 using (SqlDataReader reader = getCommand.ExecuteReader())
-                    resultTable.Load(reader);
+                    Table.Load(reader);
                 sc.Close();
             }
         }

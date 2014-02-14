@@ -11,16 +11,16 @@ namespace DC
 
         public void Update(BaseDataTable sourceTable, ItemCollection connectionArray)
         {
-            Source = new GetMSSQLData(sourceTable.TableName);
-            DataTable changesTable = sourceTable.GetChanges();
-            
+            Source = new GetMSSQLData(sourceTable.Table.TableName);
+            DataTable changesTable = sourceTable.Table.GetChanges();
+
             string command;
             bool exist = false;
             foreach (DataRow dr in changesTable.Rows)
             {
-                for (int i = 0; i < Source.Rows.Count; i++)
+                for (int i = 0; i < Source.Table.Rows.Count; i++)
                 {
-                    if (dr[Source.PrimaryKey].ToString() == Source.Rows[i][Source.PrimaryKey].ToString())
+                    if (dr[Source.PrimaryKey].ToString() == Source.Table.Rows[i][Source.PrimaryKey].ToString())
                     {
                         exist = true;
                         break;
@@ -58,19 +58,19 @@ namespace DC
 
         public string BuildUpdateCommand(DataRow dr)
         {
-            string returnString = string.Format("UPDATE {0} SET ", Source.TableName);
+            string returnString = string.Format("UPDATE {0} SET ", Source.Table.TableName);
             for (int i = 0; i < dr.ItemArray.Length; i++)
             {
-                if (Source.Columns[i].ColumnName != Source.PrimaryKey)
+                if (Source.Table.Columns[i].ColumnName != Source.PrimaryKey)
                 {
-                    if (Source.Columns[i].ColumnName == "vcChangeDate")
-                        returnString += string.Format("{0}='{1}',", Source.Columns[i].ColumnName, DateTime.Now);
+                    if (Source.Table.Columns[i].ColumnName == "vcChangeDate")
+                        returnString += string.Format("{0}='{1}',", Source.Table.Columns[i].ColumnName, DateTime.Now);
                     else
-                        returnString += string.Format("{0}='{1}',", Source.Columns[i].ColumnName, dr.ItemArray[i].ToString());
+                        returnString += string.Format("{0}='{1}',", Source.Table.Columns[i].ColumnName, dr.ItemArray[i].ToString());
                 }
             }
             returnString = returnString.Substring(0, returnString.Length - 1);
-            returnString += string.Format(" WHERE {0}='{1}'", Source.Columns[Source.PrimaryKey].ColumnName, dr[Source.PrimaryKey].ToString());
+            returnString += string.Format(" WHERE {0}='{1}'", Source.Table.Columns[Source.PrimaryKey].ColumnName, dr[Source.PrimaryKey].ToString());
             return returnString;
         }
 
@@ -78,19 +78,19 @@ namespace DC
         {
             string where = "(";
             string what = "VALUES (";
-            string returnString = string.Format("INSERT INTO {0} ", Source.TableName);
+            string returnString = string.Format("INSERT INTO {0} ", Source.Table.TableName);
             for (int i = 0; i < dr.ItemArray.Length; i++)
             {
-                if (Source.Columns[i].ColumnName != Source.PrimaryKey)
+                if (Source.Table.Columns[i].ColumnName != Source.PrimaryKey)
                 {
-                    if (Source.Columns[i].ColumnName == "vcChangeDate")
+                    if (Source.Table.Columns[i].ColumnName == "vcChangeDate")
                     {
-                        where += string.Format("{0},", Source.Columns[i].ColumnName);
+                        where += string.Format("{0},", Source.Table.Columns[i].ColumnName);
                         what += string.Format("'{0}',", DateTime.Now);
                     }
                     else
                     {
-                        where += string.Format("{0},", Source.Columns[i].ColumnName);
+                        where += string.Format("{0},", Source.Table.Columns[i].ColumnName);
                         what += string.Format("'{0}',", dr[i].ToString());
                     }
                 }

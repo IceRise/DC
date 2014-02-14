@@ -7,6 +7,7 @@
         Closed="Window_Closed"
         Loaded="Window_Loaded">
     <Grid>
+
         <Grid.RowDefinitions>
             <RowDefinition Height="23*" MaxHeight="23" />
             <RowDefinition Height="158*" />
@@ -21,13 +22,15 @@
                               MinWidth="89"
                               MaxWidth="250" />
         </Grid.ColumnDefinitions>
+
         <TreeView Name="ServerTree"
                   Grid.RowSpan="3"
-                  Grid.Column="2">
-            <TreeViewItem Name="MS" Header="MSSQL" />
-            <TreeViewItem Name="My"
-                          Header="MySQL"
-                          Visibility="Hidden" />
+                  Grid.Column="2"
+                  Margin="0.2,23,-0.4,0">
+            <TreeViewItem Name="MS" Header="MSSQL">
+            </TreeViewItem>
+            <TreeViewItem Name="My" Header="MySQL">
+            </TreeViewItem>
         </TreeView>
         <ListBox Name="DBList"
                  Grid.RowSpan="3"
@@ -52,7 +55,9 @@
                 Click="Button_Commit">
             <Image Source="Icons/Commit.ico" />
         </Button>
-        <Button Grid.Row="0"
+
+        <Button Name="Reject"
+                Grid.Row="0"
                 Grid.Column="1"
                 Margin="0,0,22.8,0"
                 HorizontalAlignment="Right"
@@ -62,5 +67,10 @@
                 Click="Button_RejectChanges">
             <Image Source="Icons/Reject.ico" />
         </Button>
+        <Label Grid.Column="2"
+               Margin="0.4,-2,-0.4,0"
+               HorizontalAlignment="Left"
+               VerticalAlignment="Top"
+               Content="Знайдені таблиці" />
     </Grid>
 </Window>

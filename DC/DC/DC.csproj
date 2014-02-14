@@ -41,7 +41,9 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Printing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -62,6 +64,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Messager.cs" />
+    <Compile Include="Searcher.cs" />
     <Compile Include="ServerAddWindow.xaml.cs">
       <DependentUpon>ServerAddWindow.xaml</DependentUpon>
     </Compile>
@@ -76,6 +79,9 @@
       <DependentUpon>SystemSettingsWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="SQLUpdater.cs" />
+    <Compile Include="TableViewer.xaml.cs">
+      <DependentUpon>TableViewer.xaml</DependentUpon>
+    </Compile>
     <Page Include="ServerAddWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -109,6 +115,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="SystemSettingsWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="TableViewer.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
